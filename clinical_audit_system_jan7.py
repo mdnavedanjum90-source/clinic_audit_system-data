@@ -30,7 +30,7 @@ def take_readings(n, warnings, flags):
     if not valid:
         flags.append("Invalid heart rate input")
     else:
-        if rate > 180:
+        if rate > 120:
             warnings.append("High heart rate detected")
             
     take_readings(n-1, warnings, flags) 
