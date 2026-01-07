@@ -1,75 +1,87 @@
-# 🏥 Clinical Data Audit System (Python)
+import uuid
 
-## Python Winter Sprint 2026  
-**Core Track – Functions and Recursion**
+#Function to validate age
+def age_validate(age):
+    if not age.isdigit():
+        return False,"Invalid Age"
+    
+    age = int(age)
+    if(age<0 or age>120):
+        return False,"Invalid Age"
+    
+    return True,age
 
----
+#Function to validate Heart rate
+def validate_Heart_Rate(rate):
+    if not rate.isdigit():
+        return False,None
+    
+    rate = int(rate)
+    return True,rate
 
-## 📌 Project Description
+#Recursive function to take heart rate readings
 
-This project is a **Clinical Data Audit System** written in Python.  
-It audits basic patient clinical data using **functions and recursion**, as required in the Python Winter Sprint 2026 assignment.
+def take_readings(n, warnings, flags):
+    if n == 0:
+        return
+    rate_input = input(f"Enter heart rate reading: ")
+    valid,rate = validate_Heart_Rate(rate_input)
+    
+    if not valid:
+        flags.append("Invalid heart rate input")
+    else:
+        if rate < 180:
+            warnings.append("High heart rate detected")
+            
+    take_readings(n-1, warnings, flags) 
+     
+     
+# Main Program
 
-The system validates patient details, audits heart rate readings, and determines a final audit status based on predefined rules.
+def clinical_audit():
+    print("---Clinical Data Audit System---\n")              
 
-Each audit is uniquely identified using Python’s built-in `uuid` module.
-
----
-
-## 🧠 Features
-
-- Takes patient details:
-  - Name
-  - Age
-  - Number of heart rate readings
-- Uses **functions** for validation
-- Uses **recursion** to input heart rate readings
-- Generates a **unique Audit ID**
-- Detects:
-  - Invalid inputs (Flags)
-  - High heart rate values (Warnings)
-- Produces a final audit result:
-  - **PASS**
-  - **REVIEW**
-  - **FAIL**
-
----
-
-## 🛠️ Technologies Used
-
-- Python 3
-- Built-in `uuid` module
-
----
-
-## 📋 Audit Logic
-
-### Validation Rules
-
-- Age must be between **0 and 120**
-- Heart rate must be **numeric**
-- Heart rate **greater than 180** triggers a warning
-
-### Final Audit Status
-
-| Condition | Status |
-|---------|--------|
-| Any invalid input | **FAIL** |
-| No flags but warnings | **REVIEW** |
-| No flags and no warnings | **PASS** |
-
----
-
-## ▶️ How the Program Works
-
-1. User enters patient name
-2. User enters age
-3. User enters number of heart rate readings
-4. Heart rate readings are taken **recursively**
-5. System validates data
-6. Final audit report is displayed
-
----
-
-## 🧪 Sample Input
-
+    audit_id = uuid.uuid4()
+    patient_name = input("Enter patient name: ")
+    age_input = input("Enter age: ")
+    reading_count = input("Enter number of heart readings: ")
+    
+    flags = []
+    warnings = []
+    
+    
+    #Validate age
+    valid_age, age_remark = age_validate(age_input)
+    if not valid_age:
+        flags.append(age_remark)
+        
+        
+   #Validate number of readings
+    if not reading_count.isdigit():
+       flags.append("Invalid number of readings")
+    else:
+        reading_count = int(reading_count)
+        take_readings(reading_count, warnings, flags) 
+        
+        
+        
+     #Final Audit Status
+    if flags:
+         status = "FAIL" 
+    elif warnings:
+        status = "REVIEW" 
+    else:
+        status = "PASS"     
+        
+        
+    #Output
+    
+    print(" ---CLINICAL AUDIT RESULT---")
+    print(f"Audit ID : {audit_id}")
+    print(f"Patient : {patient_name}")
+    print(f"Status : {status}")
+    print(f"Flags : {flags if flags else None}")
+    print(f"Warnings : {warnings if warnings else None}")
+    
+#Run program by function use
+clinical_audit()
