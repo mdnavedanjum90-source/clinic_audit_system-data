@@ -56,20 +56,4 @@ Each audit is uniquely identified using Python’s built-in `uuid` module.
 |---------|--------|
 | Any invalid input | **FAIL** |
 | No flags but warnings | **REVIEW** |
-| No flags and no warnings | **PASS** |
-
----
-
-## ▶️ How the Program Works
-
-1. User enters patient name
-2. User enters age
-3. User enters number of heart rate readings
-4. Heart rate readings are taken **recursively**
-5. System validates data
-6. Final audit report is displayed
-
----
-
-## 🧪 Sample Input
-
+| No flags and no warnings | **PASS**|
