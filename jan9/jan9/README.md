@@ -50,3 +50,24 @@ Attributes:
 3.Run play_round() inside a loop for given rounds
 
 4.Call show_score() at the end to display final scores
+
+
+🖥️ Sample Run
+Enter player name: Naved
+Enter number of rounds: 3
+
+Enter your move (rock/paper/scissors): rock
+Computer chose: scissors
+Result: You Win
+
+Enter your move (rock/paper/scissors): paper
+Computer chose: paper
+Result: Draw
+
+Enter your move (rock/paper/scissors): scissors
+Computer chose: rock
+Result: You Lose
+
+--- SCOREBOARD ---
+Naved : 1
+Computer : 1
